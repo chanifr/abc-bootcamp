@@ -1,0 +1,304 @@
+[
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440001",
+    "firstName": "Sarah",
+    "lastName": "Chen",
+    "email": "sarah.chen@email.com",
+    "phone": "+1 (555) 123-4567",
+    "status": "Active",
+    "appliedPositions": ["650e8400-e29b-41d4-a716-446655440001", "650e8400-e29b-41d4-a716-446655440002"],
+    "experience": [
+      {
+        "id": "exp-001",
+        "company": "TechCorp Solutions",
+        "title": "Senior Full Stack Developer",
+        "startDate": "2021-03-15",
+        "endDate": null,
+        "description": "Lead development of microservices architecture using Node.js and React. Mentor junior developers and conduct code reviews. Implemented CI/CD pipelines reducing deployment time by 40%.",
+        "sortOrder": 1
+      },
+      {
+        "id": "exp-002",
+        "company": "StartupXYZ",
+        "title": "Full Stack Developer",
+        "startDate": "2019-01-10",
+        "endDate": "2021-02-28",
+        "description": "Developed RESTful APIs and responsive web applications. Worked with React, Node.js, PostgreSQL, and AWS. Participated in agile development process.",
+        "sortOrder": 2
+      },
+      {
+        "id": "exp-003",
+        "company": "Digital Agency Inc",
+        "title": "Junior Frontend Developer",
+        "startDate": "2017-06-01",
+        "endDate": "2018-12-31",
+        "description": "Built responsive websites using HTML, CSS, JavaScript, and jQuery. Collaborated with designers to implement pixel-perfect designs.",
+        "sortOrder": 3
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-001",
+        "institution": "State University",
+        "degree": "Bachelor of Science",
+        "field": "Computer Science",
+        "graduationDate": "2017-05-15",
+        "sortOrder": 1
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill-001",
+        "name": "JavaScript",
+        "level": "Expert",
+        "sortOrder": 1
+      },
+      {
+        "id": "skill-002",
+        "name": "React",
+        "level": "Expert",
+        "sortOrder": 2
+      },
+      {
+        "id": "skill-003",
+        "name": "Node.js",
+        "level": "Advanced",
+        "sortOrder": 3
+      },
+      {
+        "id": "skill-004",
+        "name": "TypeScript",
+        "level": "Advanced",
+        "sortOrder": 4
+      },
+      {
+        "id": "skill-005",
+        "name": "PostgreSQL",
+        "level": "Intermediate",
+        "sortOrder": 5
+      },
+      {
+        "id": "skill-006",
+        "name": "AWS",
+        "level": "Intermediate",
+        "sortOrder": 6
+      }
+    ],
+    "originalDocuments": [
+      {
+        "id": "doc-001",
+        "filename": "sarah_chen_resume_2024.pdf",
+        "type": "CV",
+        "path": "/documents/sarah_chen_resume_2024.pdf",
+        "uploadDate": "2024-01-15T10:30:00Z"
+      }
+    ],
+    "notes": "Strong technical skills, excellent communication. Looking for leadership opportunities.",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "updatedAt": "2024-01-20T14:45:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440002",
+    "firstName": "Marcus",
+    "lastName": "Johnson",
+    "email": "marcus.j@email.com",
+    "phone": "+1 (555) 234-5678",
+    "status": "Active",
+    "appliedPositions": ["650e8400-e29b-41d4-a716-446655440003"],
+    "experience": [
+      {
+        "id": "exp-004",
+        "company": "CloudOps Inc",
+        "title": "DevOps Engineer",
+        "startDate": "2020-09-01",
+        "endDate": null,
+        "description": "Design and maintain CI/CD pipelines using Jenkins, GitLab CI, and GitHub Actions. Manage AWS infrastructure with Terraform. Implement monitoring solutions with Prometheus and Grafana.",
+        "sortOrder": 1
+      },
+      {
+        "id": "exp-005",
+        "company": "DataTech Systems",
+        "title": "Junior DevOps Engineer",
+        "startDate": "2019-03-15",
+        "endDate": "2020-08-31",
+        "description": "Assisted in maintaining production environments. Created Docker containers and helped with Kubernetes deployments. Automated repetitive tasks with Python scripts.",
+        "sortOrder": 2
+      },
+      {
+        "id": "exp-006",
+        "company": "IT Solutions Ltd",
+        "title": "System Administrator",
+        "startDate": "2018-01-10",
+        "endDate": "2019-03-01",
+        "description": "Managed Linux servers and network infrastructure. Provided technical support and troubleshooting. Implemented backup and disaster recovery procedures.",
+        "sortOrder": 3
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-002",
+        "institution": "Tech Institute",
+        "degree": "Associate Degree",
+        "field": "Information Technology",
+        "graduationDate": "2017-12-15",
+        "sortOrder": 1
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill-007",
+        "name": "Docker",
+        "level": "Expert",
+        "sortOrder": 1
+      },
+      {
+        "id": "skill-008",
+        "name": "Kubernetes",
+        "level": "Advanced",
+        "sortOrder": 2
+      },
+      {
+        "id": "skill-009",
+        "name": "AWS",
+        "level": "Advanced",
+        "sortOrder": 3
+      },
+      {
+        "id": "skill-010",
+        "name": "Terraform",
+        "level": "Advanced",
+        "sortOrder": 4
+      },
+      {
+        "id": "skill-011",
+        "name": "Python",
+        "level": "Intermediate",
+        "sortOrder": 5
+      },
+      {
+        "id": "skill-012",
+        "name": "Linux",
+        "level": "Expert",
+        "sortOrder": 6
+      }
+    ],
+    "originalDocuments": [
+      {
+        "id": "doc-002",
+        "filename": "marcus_johnson_cv.pdf",
+        "type": "CV",
+        "path": "/documents/marcus_johnson_cv.pdf",
+        "uploadDate": "2024-01-18T09:15:00Z"
+      }
+    ],
+    "notes": "Infrastructure expert. Strong automation skills. AWS certified.",
+    "createdAt": "2024-01-18T09:15:00Z",
+    "updatedAt": "2024-01-18T09:15:00Z"
+  },
+  {
+    "id": "550e8400-e29b-41d4-a716-446655440003",
+    "firstName": "Elena",
+    "lastName": "Rodriguez",
+    "email": "e.rodriguez@email.com",
+    "phone": "+1 (555) 345-6789",
+    "status": "Active",
+    "appliedPositions": ["650e8400-e29b-41d4-a716-446655440001"],
+    "experience": [
+      {
+        "id": "exp-007",
+        "company": "FinTech Innovations",
+        "title": "Backend Developer",
+        "startDate": "2022-06-01",
+        "endDate": null,
+        "description": "Develop scalable microservices using Python and FastAPI. Design database schemas and optimize queries. Implement authentication and authorization systems.",
+        "sortOrder": 1
+      },
+      {
+        "id": "exp-008",
+        "company": "E-Commerce Solutions",
+        "title": "Backend Developer",
+        "startDate": "2021-02-01",
+        "endDate": "2022-05-31",
+        "description": "Built RESTful APIs for e-commerce platform. Worked with Django, PostgreSQL, and Redis. Implemented payment processing integration.",
+        "sortOrder": 2
+      },
+      {
+        "id": "exp-009",
+        "company": "Web Services Co",
+        "title": "Junior Developer",
+        "startDate": "2020-01-15",
+        "endDate": "2021-01-31",
+        "description": "Maintained existing web applications. Fixed bugs and implemented minor features. Learned Python and SQL on the job.",
+        "sortOrder": 3
+      }
+    ],
+    "education": [
+      {
+        "id": "edu-003",
+        "institution": "Metropolitan University",
+        "degree": "Bachelor of Science",
+        "field": "Software Engineering",
+        "graduationDate": "2019-06-01",
+        "sortOrder": 1
+      },
+      {
+        "id": "edu-004",
+        "institution": "Coding Bootcamp Academy",
+        "degree": "Certificate",
+        "field": "Full Stack Development",
+        "graduationDate": "2019-09-01",
+        "sortOrder": 2
+      }
+    ],
+    "skills": [
+      {
+        "id": "skill-013",
+        "name": "Python",
+        "level": "Expert",
+        "sortOrder": 1
+      },
+      {
+        "id": "skill-014",
+        "name": "FastAPI",
+        "level": "Advanced",
+        "sortOrder": 2
+      },
+      {
+        "id": "skill-015",
+        "name": "Django",
+        "level": "Advanced",
+        "sortOrder": 3
+      },
+      {
+        "id": "skill-016",
+        "name": "PostgreSQL",
+        "level": "Advanced",
+        "sortOrder": 4
+      },
+      {
+        "id": "skill-017",
+        "name": "Redis",
+        "level": "Intermediate",
+        "sortOrder": 5
+      },
+      {
+        "id": "skill-018",
+        "name": "Docker",
+        "level": "Intermediate",
+        "sortOrder": 6
+      }
+    ],
+    "originalDocuments": [
+      {
+        "id": "doc-003",
+        "filename": "elena_rodriguez_resume.pdf",
+        "type": "Resume",
+        "path": "/documents/elena_rodriguez_resume.pdf",
+        "uploadDate": "2024-01-19T14:20:00Z"
+      }
+    ],
+    "notes": "Backend specialist with fintech experience. Strong Python skills.",
+    "createdAt": "2024-01-19T14:20:00Z",
+    "updatedAt": "2024-01-19T14:20:00Z"
+  }
+]

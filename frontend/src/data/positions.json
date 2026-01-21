@@ -1,0 +1,78 @@
+[
+  {
+    "id": "650e8400-e29b-41d4-a716-446655440001",
+    "title": "Senior Full Stack Developer",
+    "department": "Engineering",
+    "status": "Open",
+    "description": "We are seeking an experienced Full Stack Developer to join our engineering team. You will be responsible for designing, developing, and maintaining web applications using modern technologies. The ideal candidate has strong experience with both frontend and backend development, and can work independently on complex projects.\n\nResponsibilities:\n- Design and develop scalable web applications\n- Write clean, maintainable, and well-tested code\n- Collaborate with product managers and designers\n- Mentor junior developers\n- Participate in code reviews and technical discussions\n- Optimize application performance and user experience\n\nWhat We Offer:\n- Competitive salary and equity\n- Health, dental, and vision insurance\n- Flexible work arrangements\n- Professional development budget\n- Collaborative and inclusive team culture",
+    "requirements": {
+      "experience": "5+ years of professional software development experience with strong full stack capabilities. Experience with microservices architecture and cloud platforms required.",
+      "education": "Bachelor's degree in Computer Science or related field, or equivalent practical experience.",
+      "skills": [
+        "JavaScript/TypeScript",
+        "React or similar modern frontend framework",
+        "Node.js or Python",
+        "SQL and NoSQL databases",
+        "RESTful API design",
+        "Git version control",
+        "Agile/Scrum methodologies"
+      ]
+    },
+    "candidates": [
+      "550e8400-e29b-41d4-a716-446655440001",
+      "550e8400-e29b-41d4-a716-446655440003"
+    ],
+    "createdAt": "2024-01-10T08:00:00Z",
+    "updatedAt": "2024-01-20T16:30:00Z"
+  },
+  {
+    "id": "650e8400-e29b-41d4-a716-446655440002",
+    "title": "Frontend Developer",
+    "department": "Engineering",
+    "status": "Open",
+    "description": "Join our frontend team to build beautiful, responsive, and performant user interfaces. We're looking for a developer who is passionate about creating exceptional user experiences and has a strong eye for design details.\n\nResponsibilities:\n- Build responsive web applications using React and TypeScript\n- Collaborate closely with designers to implement pixel-perfect UIs\n- Optimize application performance and accessibility\n- Write comprehensive unit and integration tests\n- Participate in sprint planning and retrospectives\n- Stay current with frontend development trends and best practices\n\nWhat We Offer:\n- Competitive compensation package\n- Remote-first work culture\n- Latest MacBook Pro and equipment\n- Learning and development opportunities\n- Regular team events and hackathons",
+    "requirements": {
+      "experience": "3+ years of frontend development experience with modern JavaScript frameworks. Experience with responsive design and cross-browser compatibility essential.",
+      "education": "Bachelor's degree in Computer Science, Design, or related field preferred.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "HTML5/CSS3",
+        "Responsive design",
+        "RESTful APIs",
+        "Git",
+        "Testing frameworks (Jest, React Testing Library)"
+      ]
+    },
+    "candidates": [
+      "550e8400-e29b-41d4-a716-446655440001"
+    ],
+    "createdAt": "2024-01-12T10:00:00Z",
+    "updatedAt": "2024-01-18T11:15:00Z"
+  },
+  {
+    "id": "650e8400-e29b-41d4-a716-446655440003",
+    "title": "DevOps Engineer",
+    "department": "Infrastructure",
+    "status": "Open",
+    "description": "We are looking for a skilled DevOps Engineer to help us build and maintain our cloud infrastructure. You will work on automating deployment processes, ensuring system reliability, and improving our development workflows.\n\nResponsibilities:\n- Design and implement CI/CD pipelines\n- Manage and optimize AWS infrastructure\n- Implement monitoring and alerting systems\n- Automate infrastructure provisioning with Terraform\n- Ensure security best practices across all systems\n- Troubleshoot production issues and perform root cause analysis\n- Document processes and create runbooks\n\nWhat We Offer:\n- Competitive salary with performance bonuses\n- Comprehensive benefits package\n- Work-life balance with flexible hours\n- Cloud certification reimbursement\n- Cutting-edge technology stack",
+    "requirements": {
+      "experience": "4+ years of DevOps or infrastructure engineering experience. Strong experience with AWS and containerization required.",
+      "education": "Bachelor's degree in Computer Science, Information Technology, or equivalent experience.",
+      "skills": [
+        "AWS (EC2, ECS, RDS, S3, CloudFormation)",
+        "Docker and Kubernetes",
+        "Terraform or similar IaC tools",
+        "CI/CD tools (Jenkins, GitLab CI, GitHub Actions)",
+        "Linux system administration",
+        "Scripting (Python, Bash)",
+        "Monitoring tools (Prometheus, Grafana, ELK)"
+      ]
+    },
+    "candidates": [
+      "550e8400-e29b-41d4-a716-446655440002"
+    ],
+    "createdAt": "2024-01-14T09:30:00Z",
+    "updatedAt": "2024-01-19T10:00:00Z"
+  }
+]
