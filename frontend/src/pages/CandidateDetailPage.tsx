@@ -1,11 +1,44 @@
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getCandidateById, getPositionsByCandidateId, formatDate } from '../utils/dataHelpers';
+import { ensureAuthenticated } from '../utils/autoLogin';
 import { Card } from '../components/shared/Card';
+import type { Candidate, Position } from '../types';
 
 export const CandidateDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const candidate = id ? getCandidateById(id) : undefined;
-  const appliedPositions = id ? getPositionsByCandidateId(id) : [];
+  const [candidate, setCandidate] = useState<Candidate | undefined>();
+  const [appliedPositions, setAppliedPositions] = useState<Position[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCandidate = async () => {
+      if (!id) {
+        setLoading(false);
+        return;
+      }
+
+      await ensureAuthenticated();
+      const candidateData = await getCandidateById(id);
+      setCandidate(candidateData);
+
+      if (candidateData) {
+        const positions = await getPositionsByCandidateId(id);
+        setAppliedPositions(positions);
+      }
+
+      setLoading(false);
+    };
+    loadCandidate();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-500">Loading candidate...</p>
+      </div>
+    );
+  }
 
   if (!candidate) {
     return (

@@ -1,11 +1,44 @@
+import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getPositionById, getCandidatesByPositionId, calculateYearsOfExperience } from '../utils/dataHelpers';
+import { ensureAuthenticated } from '../utils/autoLogin';
 import { Card } from '../components/shared/Card';
+import type { Position, Candidate } from '../types';
 
 export const PositionDetailPage = () => {
   const { id } = useParams<{ id: string }>();
-  const position = id ? getPositionById(id) : undefined;
-  const candidates = id ? getCandidatesByPositionId(id) : [];
+  const [position, setPosition] = useState<Position | undefined>();
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPosition = async () => {
+      if (!id) {
+        setLoading(false);
+        return;
+      }
+
+      await ensureAuthenticated();
+      const positionData = await getPositionById(id);
+      setPosition(positionData);
+
+      if (positionData) {
+        const candidatesData = await getCandidatesByPositionId(id);
+        setCandidates(candidatesData);
+      }
+
+      setLoading(false);
+    };
+    loadPosition();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-gray-500">Loading position...</p>
+      </div>
+    );
+  }
 
   if (!position) {
     return (

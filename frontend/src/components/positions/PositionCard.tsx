@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import type { Position } from '../../types';
-import { getCandidatesByPositionId } from '../../utils/dataHelpers';
 import { Card } from '../shared/Card';
 
 interface PositionCardProps {
@@ -8,7 +7,7 @@ interface PositionCardProps {
 }
 
 export const PositionCard = ({ position }: PositionCardProps) => {
-  const candidates = getCandidatesByPositionId(position.id);
+  const candidatesCount = position.candidates.length;
 
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -28,7 +27,7 @@ export const PositionCard = ({ position }: PositionCardProps) => {
           </p>
 
           <div className="mt-4 flex items-center gap-4 text-sm text-gray-500">
-            <span>{candidates.length} candidate{candidates.length !== 1 ? 's' : ''}</span>
+            <span>{candidatesCount} candidate{candidatesCount !== 1 ? 's' : ''}</span>
             <span>•</span>
             <span>{position.requirements.skills.length} required skills</span>
           </div>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Candidate } from '../../types';
-import { calculateYearsOfExperience, getPositionsByCandidateId } from '../../utils/dataHelpers';
+import { calculateYearsOfExperience } from '../../utils/dataHelpers';
 import { Card } from '../shared/Card';
 
 interface CandidateCardProps {
@@ -8,7 +8,6 @@ interface CandidateCardProps {
 }
 
 export const CandidateCard = ({ candidate }: CandidateCardProps) => {
-  const positions = getPositionsByCandidateId(candidate.id);
   const yearsExp = calculateYearsOfExperience(candidate);
   const currentRole = candidate.experience.find(e => e.endDate === null);
 
@@ -49,9 +48,9 @@ export const CandidateCard = ({ candidate }: CandidateCardProps) => {
 
           <div className="mt-3 text-sm text-gray-500">
             <p>{yearsExp} years of experience</p>
-            {positions.length > 0 && (
+            {candidate.appliedPositions.length > 0 && (
               <p className="mt-1">
-                Applied to: {positions.map(p => p.title).join(', ')}
+                Applied to {candidate.appliedPositions.length} position{candidate.appliedPositions.length !== 1 ? 's' : ''}
               </p>
             )}
           </div>

@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    container_name: hellio_hr_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_USER: hellio
+      MYSQL_PASSWORD: hellio123
+      MYSQL_DATABASE: hellio_hr
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "hellio", "-phellio123"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - hellio_network
+
+  # Backend API (FastAPI)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hellio_hr_backend
+    environment:
+      DATABASE_URL: mysql+aiomysql://hellio:hellio123@db:3306/hellio_hr
+      SECRET_KEY: dev-secret-key-change-in-production-min-32-chars
+      DEBUG: "True"
+      ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5173,http://localhost:5174,http://frontend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/alembic:/app/alembic
+      - ./backend/scripts:/app/scripts
+      - ./backend/storage:/app/storage
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+        alembic upgrade head &&
+        uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+    networks:
+      - hellio_network
+
+  # Frontend (React + Vite)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hellio_hr_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - hellio_network
+
+volumes:
+  mysql_data:
+
+networks:
+  hellio_network:
+    driver: bridge

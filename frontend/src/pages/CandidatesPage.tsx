@@ -1,12 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CandidateCard } from '../components/candidates/CandidateCard';
-import { searchCandidates, positions } from '../utils/dataHelpers';
+import { searchCandidates, fetchPositions } from '../utils/dataHelpers';
+import { ensureAuthenticated } from '../utils/autoLogin';
+import type { Candidate, Position } from '../types';
 
 export const CandidatesPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPosition, setSelectedPosition] = useState<string>('');
+  const [filteredCandidates, setFilteredCandidates] = useState<Candidate[]>([]);
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filteredCandidates = searchCandidates(searchQuery, selectedPosition);
+  // Load positions on mount
+  useEffect(() => {
+    const loadData = async () => {
+      await ensureAuthenticated();
+      const positionsData = await fetchPositions();
+      setPositions(positionsData);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
+
+  // Search candidates when query or filter changes
+  useEffect(() => {
+    const search = async () => {
+      setLoading(true);
+      const results = await searchCandidates(searchQuery, selectedPosition);
+      setFilteredCandidates(results);
+      setLoading(false);
+    };
+    search();
+  }, [searchQuery, selectedPosition]);
 
   return (
     <div>
@@ -52,7 +77,11 @@ export const CandidatesPage = () => {
         </div>
       </div>
 
-      {filteredCandidates.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Loading candidates...</p>
+        </div>
+      ) : filteredCandidates.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500">No candidates found matching your criteria.</p>
         </div>

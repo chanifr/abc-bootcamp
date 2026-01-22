@@ -1,19 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PositionCard } from '../components/positions/PositionCard';
 import { getOpenPositions } from '../utils/dataHelpers';
+import { ensureAuthenticated } from '../utils/autoLogin';
+import type { Position } from '../types';
 
 export const PositionsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const openPositions = getOpenPositions();
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPositions = async () => {
+      await ensureAuthenticated();
+      const positionsData = await getOpenPositions();
+      setPositions(positionsData);
+      setLoading(false);
+    };
+    loadPositions();
+  }, []);
 
   const filteredPositions = searchQuery
-    ? openPositions.filter(p =>
+    ? positions.filter(p =>
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.department.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.requirements.skills.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()))
       )
-    : openPositions;
+    : positions;
 
   return (
     <div>
@@ -38,7 +51,11 @@ export const PositionsPage = () => {
         />
       </div>
 
-      {filteredPositions.length === 0 ? (
+      {loading ? (
+        <div className="text-center py-12">
+          <p className="text-gray-500">Loading positions...</p>
+        </div>
+      ) : filteredPositions.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500">No positions found matching your criteria.</p>
         </div>

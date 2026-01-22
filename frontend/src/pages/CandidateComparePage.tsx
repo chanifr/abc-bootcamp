@@ -1,18 +1,32 @@
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { getCandidateById, getActiveCandidates, formatDate, calculateYearsOfExperience, getPositionsByCandidateId } from '../utils/dataHelpers';
-import type { Candidate } from '../types';
+import { getCandidateById, fetchCandidates, formatDate, calculateYearsOfExperience, getPositionsByCandidateId } from '../utils/dataHelpers';
+import { ensureAuthenticated } from '../utils/autoLogin';
+import type { Candidate, Position } from '../types';
 import { Card } from '../components/shared/Card';
 
 interface CandidateColumnProps {
   candidate: Candidate | null;
+  allCandidates: Candidate[];
+  appliedPositions: Position[];
   onSelect: (candidateId: string) => void;
+  loading: boolean;
 }
 
-const CandidateColumn = ({ candidate, onSelect }: CandidateColumnProps) => {
-  const candidates = getActiveCandidates();
-  const appliedPositions = candidate ? getPositionsByCandidateId(candidate.id) : [];
+const CandidateColumn = ({ candidate, allCandidates, appliedPositions, onSelect, loading }: CandidateColumnProps) => {
   const yearsExp = candidate ? calculateYearsOfExperience(candidate) : 0;
+
+  if (loading) {
+    return (
+      <div className="flex-1">
+        <Card>
+          <div className="text-center py-12">
+            <p className="text-gray-500">Loading...</p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 
   if (!candidate) {
     return (
@@ -26,7 +40,7 @@ const CandidateColumn = ({ candidate, onSelect }: CandidateColumnProps) => {
               defaultValue=""
             >
               <option value="">Choose a candidate...</option>
-              {candidates.map(c => (
+              {allCandidates.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.firstName} {c.lastName}
                 </option>
@@ -60,7 +74,7 @@ const CandidateColumn = ({ candidate, onSelect }: CandidateColumnProps) => {
               onChange={(e) => onSelect(e.target.value)}
               className="block w-full rounded-md border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
-              {candidates.map(c => (
+              {allCandidates.map(c => (
                 <option key={c.id} value={c.id}>
                   {c.firstName} {c.lastName}
                 </option>
@@ -188,32 +202,68 @@ export const CandidateComparePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [candidate1, setCandidate1] = useState<Candidate | null>(null);
   const [candidate2, setCandidate2] = useState<Candidate | null>(null);
+  const [allCandidates, setAllCandidates] = useState<Candidate[]>([]);
+  const [positions1, setPositions1] = useState<Position[]>([]);
+  const [positions2, setPositions2] = useState<Position[]>([]);
+  const [loading, setLoading] = useState(true);
 
+  // Load all candidates on mount
   useEffect(() => {
-    const candidateIds = searchParams.get('candidates')?.split(',') || [];
-    if (candidateIds[0]) {
-      const c1 = getCandidateById(candidateIds[0]);
-      if (c1) setCandidate1(c1);
-    }
-    if (candidateIds[1]) {
-      const c2 = getCandidateById(candidateIds[1]);
-      if (c2) setCandidate2(c2);
-    }
-  }, [searchParams]);
+    const loadCandidates = async () => {
+      await ensureAuthenticated();
+      const candidates = await fetchCandidates();
+      setAllCandidates(candidates);
+      setLoading(false);
+    };
+    loadCandidates();
+  }, []);
 
-  const handleSelectCandidate1 = (candidateId: string) => {
-    const candidate = getCandidateById(candidateId);
+  // Load candidates from URL params
+  useEffect(() => {
+    const loadCandidatesFromParams = async () => {
+      const candidateIds = searchParams.get('candidates')?.split(',') || [];
+
+      if (candidateIds[0]) {
+        const c1 = await getCandidateById(candidateIds[0]);
+        if (c1) {
+          setCandidate1(c1);
+          const pos1 = await getPositionsByCandidateId(candidateIds[0]);
+          setPositions1(pos1);
+        }
+      }
+
+      if (candidateIds[1]) {
+        const c2 = await getCandidateById(candidateIds[1]);
+        if (c2) {
+          setCandidate2(c2);
+          const pos2 = await getPositionsByCandidateId(candidateIds[1]);
+          setPositions2(pos2);
+        }
+      }
+    };
+
+    if (allCandidates.length > 0) {
+      loadCandidatesFromParams();
+    }
+  }, [searchParams, allCandidates]);
+
+  const handleSelectCandidate1 = async (candidateId: string) => {
+    const candidate = await getCandidateById(candidateId);
     if (candidate) {
       setCandidate1(candidate);
+      const positions = await getPositionsByCandidateId(candidateId);
+      setPositions1(positions);
       const ids = [candidateId, candidate2?.id].filter(Boolean);
       setSearchParams({ candidates: ids.join(',') });
     }
   };
 
-  const handleSelectCandidate2 = (candidateId: string) => {
-    const candidate = getCandidateById(candidateId);
+  const handleSelectCandidate2 = async (candidateId: string) => {
+    const candidate = await getCandidateById(candidateId);
     if (candidate) {
       setCandidate2(candidate);
+      const positions = await getPositionsByCandidateId(candidateId);
+      setPositions2(positions);
       const ids = [candidate1?.id, candidateId].filter(Boolean);
       setSearchParams({ candidates: ids.join(',') });
     }
@@ -232,8 +282,20 @@ export const CandidateComparePage = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6">
-        <CandidateColumn candidate={candidate1} onSelect={handleSelectCandidate1} />
-        <CandidateColumn candidate={candidate2} onSelect={handleSelectCandidate2} />
+        <CandidateColumn
+          candidate={candidate1}
+          allCandidates={allCandidates}
+          appliedPositions={positions1}
+          onSelect={handleSelectCandidate1}
+          loading={loading}
+        />
+        <CandidateColumn
+          candidate={candidate2}
+          allCandidates={allCandidates}
+          appliedPositions={positions2}
+          onSelect={handleSelectCandidate2}
+          loading={loading}
+        />
       </div>
     </div>
   );
