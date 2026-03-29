@@ -41,6 +41,7 @@ services:
       - ./backend/alembic:/app/alembic
       - ./backend/scripts:/app/scripts
       - ./backend/storage:/app/storage
+      - ./data_hellio_hr:/app/data_hellio_hr:ro
     depends_on:
       db:
         condition: service_healthy

@@ -5,6 +5,7 @@ import { CandidateDetailPage } from './pages/CandidateDetailPage';
 import { CandidateComparePage } from './pages/CandidateComparePage';
 import { PositionsPage } from './pages/PositionsPage';
 import { PositionDetailPage } from './pages/PositionDetailPage';
+import { IngestionPage } from './pages/IngestionPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/candidates/compare" element={<CandidateComparePage />} />
           <Route path="/positions" element={<PositionsPage />} />
           <Route path="/positions/:id" element={<PositionDetailPage />} />
+          <Route path="/ingestion" element={<IngestionPage />} />
         </Routes>
       </Layout>
     </Router>

@@ -44,8 +44,9 @@ async def health():
 
 
 # Import and include routers
-from app.api.v1 import auth, candidates, positions
+from app.api.v1 import auth, candidates, ingestion, positions
 
 app.include_router(auth.router, prefix=f"{settings.API_V1_PREFIX}/auth", tags=["auth"])
 app.include_router(candidates.router, prefix=f"{settings.API_V1_PREFIX}/candidates", tags=["candidates"])
 app.include_router(positions.router, prefix=f"{settings.API_V1_PREFIX}/positions", tags=["positions"])
+app.include_router(ingestion.router, prefix=f"{settings.API_V1_PREFIX}/ingestion", tags=["ingestion"])
